@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suyash Chaubey - Visual Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --python: #3776ab;
+            --cpp: #00599c;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+            width: 100%;
+        }
+        
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            margin: 0 auto 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: white;
+            color: var(--primary);
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+        
+        section {
+            padding: 5rem 2rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+        
+        /* 3D Language Cards */
+        .language-showcase {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 3rem;
+            margin: 4rem 0;
+        }
+        
+        .language-card {
+            width: 280px;
+            height: 350px;
+            perspective: 1000px;
+        }
+        
+        .language-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+        
+        .language-card:hover .language-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .language-card-front, 
+        .language-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 2rem;
+        }
+        
+        .language-card-front {
+            background: linear-gradient(45deg, #f3f4f6, #e5e7eb);
+        }
+        
+        .language-card-back {
+            background: white;
+            transform: rotateY(180deg);
+        }
+        
+        .python-card .language-card-front {
+            background: linear-gradient(45deg, var(--python), #ffd43b);
+        }
+        
+        .cpp-card .language-card-front {
+            background: linear-gradient(45deg, var(--cpp), #6495ed);
+        }
+        
+        .language-icon {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+        
+        .language-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .language-desc {
+            text-align: center;
+            line-height: 1.6;
+        }
+        
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .skill-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 4rem auto;
+        }
+        
+        .timeline:before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background: var(--primary);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+        
+        .timeline-item {
+            padding: 1rem 2rem;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        
+        .timeline-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        
+        .timeline-date {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content:after {
+            content: '';
+            position: absolute;
+            right: -10px;
+            top: 20px;
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 10px solid white;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content:after {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 20px;
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-right: 10px solid white;
+        }
+        
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .project-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .project-info {
+            padding: 1.5rem;
+        }
+        
+        .project-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .tech-tag {
+            background: #e0e7ff;
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        /* Contact */
+        .contact-info {
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .contact-item {
+            margin: 1.5rem 0;
+            font-size: 1.1rem;
+        }
+        
+        .contact-icon {
+            margin-right: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .language-showcase {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .timeline:before {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 0;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-content:after,
+            .timeline-item:nth-child(even) .timeline-content:after {
+                left: -10px;
+                right: auto;
+                border-right: 10px solid white;
+                border-left: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <!-- Replace with your actual profile image -->
+            <img src=c:\Users\Lenovo\Downloads\1752868874304.jpeg alt="Suyash Chaubey" class="profile-image">
+            <h1>Suyash Chaubey</h1>
+            <p class="tagline">Computer Science Engineer | Python & Java Developer</p>
+            <div>
+                <a href="#projects" class="btn">View My Work</a>
+                <a href="#contact" class="btn btn-outline">Contact Me</a>
+            </div>
+        </div>
+    </header>
+    
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem; font-size: 1.1rem;">
+                Self-believer, pioneer and optimistic thinker with a passion for technology and programming. 
+                I've gained expertise in Python and Java, completed various courses on Coursera, and actively 
+                participate in tech competitions to expand my knowledge.
+            </p>
+            
+            <div class="language-showcase">
+                <!-- 3D Python Card -->
+                <div class="language-card python-card">
+                    <div class="language-card-inner">
+                        <div class="language-card-front">
+                            <i class="fab fa-python language-icon"></i>
+                            <h3 class="language-name">Python</h3>
+                        </div>
+                        <div class="language-card-back">
+                            <p class="language-desc">
+                                Experienced in Python programming with focus on algorithms and problem solving. 
+                                Completed Coursera certifications in Python programming and AI.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 3D C++ Card -->
+                <div class="language-card cpp-card">
+                    <div class="language-card-inner">
+                        <div class="language-card-front">
+                            <i class="fas fa-code language-icon"></i>
+                            <h3 class="language-name">C++</h3>
+                        </div>
+                        <div class="language-card-back">
+                            <p class="language-desc">
+                                Strong knowledge of C++ fundamentals, data structures and algorithms. 
+                                Experience in competitive programming using C++.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i class="fab fa-java skill-icon"></i>
+                    <h3>Java</h3>
+                    <p>Object-oriented programming, Data structures</p>
+                </div>
+                
+                <div class="skill-card">
+                    <i class="fas fa-database skill-icon"></i>
+                    <h3>Databases</h3>
+                    <p>MySQL, MongoDB</p>
+                </div>
+                
+                <div class="skill-card">
+                    <i class="fas fa-code-branch skill-icon"></i>
+                    <h3>Version Control</h3>
+                    <p>Git, GitHub</p>
+                </div>
+                
+                <div class="skill-card">
+                    <i class="fas fa-laptop-code skill-icon"></i>
+                    <h3>Web Development</h3>
+                    <p>HTML, CSS, JavaScript</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="education" style="background: #f3f4f6;">
+        <div class="container">
+            <h2 class="section-title">Education & Experience</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2020</div>
+                        <h3>10th Grade</h3>
+                        <p>Sarswati Shishu Mandir Inter College</p>
+                        <p>Percentage: 80%</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2022</div>
+                        <h3>12th Grade</h3>
+                        <p>Sarswati Shishu Mandir Inter College</p>
+                        <p>Percentage: 83%</p>
+                        <p>Physics, Chemistry, Mathematics</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2022-2026</div>
+                        <h3>B.Tech in CSE</h3>
+                        <p>Lovely Professional University</p>
+                        <p>CGPA: 5.12</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">15 Mar - 19 Apr 2024</div>
+                        <h3>Internship Studio</h3>
+                        <p><strong>Software Tester</strong></p>
+                        <ul>
+                            <li>Performed comprehensive website testing including functionality, usability, and performance testing</li>
+                            <li>Identified and documented software defects using bug tracking systems</li>
+                            <li>Created and executed test cases to ensure website quality standards</li>
+                            <li>Collaborated with development team to resolve identified issues</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">My Projects</h2>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/600x400?text=TINDOC+Website" alt="TINDOC Website" class="project-image">
+                    <div class="project-info">
+                        <h3 class="project-title">TINDOC Website</h3>
+                        <p>A web application that helps users easily purchase dogs from nearby places.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Add more projects as needed -->
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/600x400?text=Project+2" alt="Project 2" class="project-image">
+                    <div class="project-info">
+                        <h3 class="project-title">Project Title</h3>
+                        <p>Project description goes here. Explain what the project does and its purpose.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Technology 1</span>
+                            <span class="tech-tag">Technology 2</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+            <a href="#internship" class="btn">View My Internship</a>
+            <div class="internship-links">
+    <h4>Internship Links:</h4>
+    <a href="https://drive.google.com/file/d/1ezA9qc64R8hMhPneQDMgvTFTbMmQMhAx/view?usp=drive_link" class="internship-link" target="_blank">
+        <i class="fas fa-external-link-alt"></i> Certificate
+    </a>
+</div>
+            </div>
+        </div>
+    </header>
+    
+    <section id="internship">
+        <div class="container">
+            <h2 class="section-title">Internship Experience</h2>
+            
+            <div class="internship-highlight">
+                <h3>Software Testing Intern</h3>
+                
+                <div class="internship-details">
+                    <div>
+                        <strong>Company</strong>
+                        <span>Internship Studio</span>
+                    </div>
+                    <div>
+                        <strong>Duration</strong>
+                        <span>15 March 2024 - 19 April 2024</span>
+                    </div>
+                    <div>
+                        <strong>Role</strong>
+                        <span>Software Tester</span>
+                    </div>
+                </div>
+                
+                <h4>Key Responsibilities:</h4>
+                <ul>
+                    <li>Performed comprehensive testing of web applications including functional, UI, and regression testing</li>
+                    <li>Identified, documented, and tracked software defects using bug tracking systems</li>
+                    <li>Created and executed test cases to validate software requirements</li>
+                    <li>Collaborated with development team to resolve identified issues</li>
+                    <li>Participated in daily stand-up meetings and sprint planning</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+          </body>
+        <div class="container">
+            <h2 class="section-title">Certifications</h2>  
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i class="fas fa-certificate skill-icon"></i>
+                    <h3>Programming, Greedy Algorithm</h3>
+                    <p>Coursera (2024)</p>
+                </div>
+                
+                <div class="skill-card">
+                    <i class="fas fa-certificate skill-icon"></i>
+                    <h3>Learn to code with AI</h3>
+                    <p>Coursera (2024)</p>
+                </div>
+                
+                <div class="skill-card">
+                    <i class="fas fa-certificate skill-icon"></i>
+                    <h3>Data Structures and Algorithms</h3>
+                    <p>GeeksforGeeks (2024)</p>
+                </div>
+                </div>
+        <div class="container">
+           <h2 class="section-title">Achievement</h2>
+<div class="skill-card">
+    <i class="fas fa-trophy skill-icon"></i>
+    <h3>Most Consistent Learner</h3>
+    <p>Awarded by Coursera (2024)</p>
+    <a href="https://drive.google.com/file/d/1FqM5Q5rS42h-0AecyKbfgCLGvVd4oX5A/view?usp=drive_link" target="_blank" class="btn" style="display: inline-block; margin-top: 10px;">
+        View Achievement
+    </a>
+</div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt contact-icon"></i>
+                    Naughar – Siddharth Nagar, UP – India
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-phone contact-icon"></i>
+                    +91 6307755267
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-envelope contact-icon"></i>
+                    suyashchaubey8@gmail.com
+                </div>
+            </div>
+            
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/way4suyashchaubey/" class="social-link" target="_blank">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com/Suyashchaubey" class="social-link" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Suyash Chaubey. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
